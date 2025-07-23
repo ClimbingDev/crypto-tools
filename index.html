@@ -1,8 +1,184 @@
-<!doctypehtml><html lang=en><script>(() => {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const savedTheme = localStorage.getItem('theme'); // e.g. 'dark' or 'light'
+<!DOCTYPE html>
+<html lang="en">
 
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.documentElement.classList.add('dark-mode');
-    }
-    })();</script><meta charset=UTF-8><meta content="width=device-width,initial-scale=1"name=viewport><title>Crypto tools</title><link href=https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css rel=stylesheet><link href=icon.png rel=icon type=image/x-icon><link href=https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css rel=stylesheet><link href=https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css rel=stylesheet><link href=https://cdn.datatables.net/fixedcolumns/4.3.0/css/fixedColumns.dataTables.min.css rel=stylesheet><link href=styles.css rel=stylesheet><header class="main-header full"><div class=main-header-wrapper><div class=header-content><img alt=Logo class=header-icon src=icon.png><div class=search-bar><i class="bi bi-search"></i> <input class=search-crypto placeholder=Search...></div><div class=header-right><a id=themeSwitchLink><i class="bi bi-sun"style=margin-right:4px></i> Dark mode</a><div class=dropdown-full><div class=dropdown-wrapper><select class=time-select id=timeRangeSelect><option value=week>Week<option value=month>Month<option value=year>Year</select> <i class="bi bi-chevron-down dropdown-icon"></i></div></div></div></div></div></header><header class="main-header mobile"><div class=main-header-wrapper><div class=header-content><img alt=Logo class=header-icon src=icon.png><div class=header-right><div class=dropdown-wrapper><select class=time-select id=timeRangeSelect><option value=week>Week<option value=month>Month<option value=year>Year</select> <i class="bi bi-chevron-down dropdown-icon"></i></div><button class=menu-button><i class="bi bi-list mobile-menu"></i></button></div></div></div><div class=search-bar><i class="bi bi-search"></i> <input class=search-crypto placeholder=Search...></div></header><div class=overlay id=myNav><div class=nav-header><img alt=Icon class=nav-icon src=icon.png> <a href=javascript:void(0) onclick=closeNav() class=closebtn>×</a></div><div class=overlay-content><a href=#home onclick=closeNav()>Home</a><div class=theme-toggle><div class=theme-toggle-left>Theme <i class="bi bi-sun"></i></div><div class=theme-toggle-right><label class=switch><input id=themeSwitch type=checkbox> <span class=slider></span></label></div></div></div></div><div class=main-container><link href=https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css rel=stylesheet><div class=crypto-info-container><div class=information-heading>Crypto, made simple.</div><div class=information-extra>Enhance your trading - replace crypto's complexity with clarity and insight.</div></div><div class="swiper swiper-status"><div class=swiper-wrapper></div></div><div class=table-container style=width:100%;overflow:hidden;box-sizing:border-box><table class=nowrap id=table1 style=width:100%;box-sizing:border-box><thead><tr><th>Currency<th>Price<th>Change<th>Dominance<th>Volatility<th style=text-align:right>BTC similiarity<th>Trend Strength<th id=time-interval>Week<tbody></table></div><div class=footer>© Copyright 2025. Terms apply. Last updated: <span id=time></span></div></div><script src=https://code.jquery.com/jquery-3.7.1.min.js crossorigin=anonymous integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="></script><script src=https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js></script><script src=https://cdn.datatables.net/2.0.8/js/dataTables.js></script><script src=https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js></script><script src=https://climbingdev.github.io/crypto-data/data.js></script><script src=functions.js></script><script src=script.js></script>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto tools</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="icon-top.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.3.0/css/fixedColumns.dataTables.min.css">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header class="full main-header">
+        <div class="main-header-wrapper">
+            <div class="header-content">
+                <img src="icon.png" alt="Logo" class="header-icon" />
+                <div class="search-bar">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Search..." class="search-crypto" />
+                </div>
+                <div class="header-right">
+                    <a id="themeSwitchLink"><i class="bi bi-sun" style="margin-right: 4px;"></i> Dark mode</a>
+                    <div class="dropdown-full">
+                        <div class="dropdown-wrapper">
+                            <select class="time-select">
+                                <option value="week">Week</option>
+                                <option value="month">Month</option>
+                                <option value="year">Year</option>
+                            </select>
+                            <i class="bi bi-chevron-down dropdown-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <header class="mobile main-header">
+        <div class="main-header-wrapper">
+            <div class="header-content">
+                <img src="icon.png" alt="Logo" class="header-icon" />
+                <div class="header-right">
+                    <div class="dropdown-wrapper">
+                        <select class="time-select">
+                            <option value="week">Week</option>
+                            <option value="month">Month</option>
+                            <option value="year">Year</option>
+                        </select>
+                        <i class="bi bi-chevron-down dropdown-icon"></i>
+                    </div>
+                    <button class="menu-button"><i style="font-size: 24px;" class="mobile-menu bi bi-list"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-search-bar search-bar">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Search..." class="search-crypto" />
+        </div>
+    </header>
+    <div id="myNav" class="overlay">
+        <div class="nav-header">
+            <img src="icon.png" alt="Icon" class="nav-icon">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        </div>
+
+        <div class="overlay-content">
+            <a onclick="closeNav()" href="#home">Home</a>
+
+            <div class="theme-toggle">
+                <div class="theme-toggle-left">Theme <i class="bi bi-sun"></i></div>
+                <div class="theme-toggle-right">
+                    <label class="switch">
+                        <input type="checkbox" id="themeSwitch">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-container">
+        <!-- Include Bootstrap Icons if you want to use them -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+        <div class="crypto-info-container">
+            <div class="information-heading">
+                Crypto, made simple.
+            </div>
+            <div class="information-extra">
+                Enhance your trading - replace crypto's complexity with clarity and insight.
+            </div>
+        </div>
+        <div class="swiper swiper-status">
+            <div class="swiper-wrapper">
+            </div>
+            <!-- arrows -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+        <div class="swiper swiper-options">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide selected">
+                    <i class="bi bi-house-door-fill me-2"></i> <span class="mode">Default</span>
+                </div>
+                <div class="swiper-slide">
+                    <i class="bi bi-graph-up-arrow me-2"></i> <span class="mode">Statistics</span>
+                </div>
+                <div class="swiper-slide">
+                    <i class="bi bi-cloud-fill me-2"></i> <span class="mode">Minimalist</span>
+                </div>
+                <!--<div class="swiper-slide">
+                    <i class="bi bi-sliders2-vertical me-2"></i> <span class="mode">Advanced</span>
+                </div>-->
+                <div class="swiper-slide saved-only">
+                    <i class="bi bi-star-fill me-2"></i> <span class="mode">Saved</span>
+                </div>
+            </div>
+
+            <!-- arrows -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+
+        <div class="table-container" style="width:100%; overflow: hidden; box-sizing: border-box">
+            <table id="table1" class="nowrap" style="width:100%; box-sizing: border-box">
+                <thead>
+                    <tr>
+                        <th><i class="bi bi-bookmark-fill" style="vertical-align: middle"></i></th>
+                        <th>Currency</th>
+                        <th>Price</th>
+                        <th>Change</th>
+                        <th>Volume</th>
+                        <th>Volatility</th>
+                        <th style="text-align: right">Bitcoin similiarity</th>
+                        <th>Trend</th>
+                        <th style="text-align: right">Indicators</th>
+                        <th style="text-align: right">Low</th>
+                        <th style="text-align: center">Range</th>
+                        <th style="text-align: left">High</th>
+                        <th>Price velocity</th>
+                        <th>RSI</th>
+                        <th class="time-interval" style="text-align: right">Week</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-left">
+                    Last updated:<div id="time"></div>
+                </div>
+                <div class="footer-right">
+                    <a href="#">&copy; 2025 Crypto Tools. </a>
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        (() => {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const savedTheme = localStorage.getItem('theme'); // e.g. 'dark' or 'light'
+
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.documentElement.classList.add('dark-mode');
+            }
+        })();
+    </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/4.3.0/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://climbingdev.github.io/crypto-data/data.js"></script>
+    <script src="functions.js"></script>
+    <script src="main.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
